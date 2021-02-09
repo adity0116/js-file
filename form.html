@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .box{
+                justify-content: center;
+               align-items: center;
+                margin: auto;
+                width: 300px;
+                border: 2px solid darkcyan;
+                padding: 20px;
+            }
+            input, button:disabled{
+                cursor: not-allowed;
+            }
+            input, button:enabled{
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            var userDetails={
+                CardNo: 4444555566667777,
+                CVV: 345,
+                ExpYear: 2021
+            }
+            function VerifyCard(){
+               var cardnumber=document.getElementById("txtCard").value;
+               if(cardnumber==userDetails.CardNo){
+                   document.getElementById("txtCvv").disabled=false;
+                   document.getElementById("txtCvv").focus();
+                   document.getElementById("txtCard").disabled=true;
+               }
+            }
+            function VerifyCvv(){
+                var cvv=document.getElementById("txtCvv").value;
+                if(cvv==userDetails.CVV){
+                    document.getElementById("lstExp").disabled=false;
+                    document.getElementById("lstExp").focus();
+                    document.getElementById("txtCvv").disabled=true;
+                }
+            }
+            function VerifyExp(){
+                var Exp=document.getElementById("lstExp").value;
+                if(Exp==userDetails.ExpYear){
+                    document.getElementById("btnOrd").disabled=false;
+                    document.getElementById("lstExp").disabled=true;
+                }
+            }
+            function ClickSubmit(){
+                alert("Payment is undergoing...");
+            }
+        </script>
+        <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+    </head>
+    <body class="container-fluid">
+        
+        <div class="box">
+            <h2>Payment details</h2>
+            <div class="form-group">
+                <label>Card number</label>
+                <div>
+                    <input onkeyup="VerifyCard()" type="text" id="txtCard" placeholder="Please Enter 4444555566667777" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Cvv</label>
+                <div>
+                    <input onkeyup="VerifyCvv()" disabled id="txtCvv" type="text" placeholder="Please Enter 345" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Expary date</label>
+                <div>
+                    <select onchange="VerifyExp()" disabled id="lstExp" class="form-control">
+                        <option>Select year</option>
+                        <option>2021</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button onclick="ClickSubmit()" disabled id="btnOrd" class="btn btn-primary btn-block">Place order</button>
+            </div>
+
+        </div>
+
+    </body>
+</html>
